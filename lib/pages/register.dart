@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dashboard.dart';
-import 'register.dart'; // Import halaman pendaftaran
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _signInWithEmailAndPassword() async {
+  Future<void> _registerWithEmailAndPassword() async {
     try {
       final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(
+          await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
@@ -24,26 +23,18 @@ class _LoginPageState extends State<LoginPage> {
       final User? user = userCredential.user;
 
       if (user != null) {
-        // Navigate to the DashboardPage after successful login
+        // Navigate to the DashboardPage after successful registration
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => DashboardPage()),
         );
       } else {
-        print('Sign in failed. User is null.');
+        print('Registration failed. User is null.');
       }
     } catch (e) {
-      print('Error during sign in: $e');
+      print('Error during registration: $e');
       // Handle errors, display error messages, etc.
     }
-  }
-
-  // Fungsi untuk menavigasi ke halaman pendaftaran
-  void _navigateToRegisterPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterPage()),
-    );
   }
 
   @override
@@ -63,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 50),
               Text(
-                'Welcome back!',
+                'Create an Account',
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
@@ -89,27 +80,23 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 10),
               ElevatedButton(
-                onPressed: _signInWithEmailAndPassword,
-                child: Text('Sign In'),
+                onPressed: _registerWithEmailAndPassword,
+                child: Text('Register'),
               ),
               const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Not a member?',
+                    'Already have an account?',
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 4),
-                  // Tombol untuk navigasi ke halaman pendaftaran
-                  TextButton(
-                    onPressed: _navigateToRegisterPage,
-                    child: Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

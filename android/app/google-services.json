@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "707406560115",
+    "project_id": "tubes-pemob186",
+    "storage_bucket": "tubes-pemob186.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707406560115:android:77875c1eb84ef33d596306",
+        "android_client_info": {
+          "package_name": "com.example.modernlogintute"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq7trALws9NHo3vGv5cO98itlfo29nUvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
